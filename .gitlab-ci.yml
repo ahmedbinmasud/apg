@@ -25,6 +25,10 @@ build-job-1:
       curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
       echo "deb https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
       apt-get update && apt-get install -y google-cloud-sdk
+      # Save secret file to a location accessible by the script
+      echo "$SECRET_FILE" > secret_file
+      chmod 600 secret_file
+      # Use the secret file as needed in your script
       # SECURE_FILES_DOWNLOAD
       curl --silent "https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer" | bash
       # Executing bash script to get access token & stable_revision_number
@@ -48,7 +52,6 @@ deploy:
         
   needs:
     - build-job-1
-
 
 # integration_test:
   # stage: integration_test
