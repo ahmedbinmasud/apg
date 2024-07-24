@@ -26,20 +26,20 @@ pipeline {
 
           // Download secure files within the temporary directory
           sh 'sudo curl --silent "https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer" | sudo bash -c "cat > /tmp/download/installer"'
-          sh'pwd'
+          
+          // Create a directory for secure files
           sh 'mkdir -p .secure_files'
           sh 'ls -a'
           sh 'sudo chmod +x revision1.sh'
+
           // Replace with your script or commands to get access token and revision number
-        
-           sh 'sudo ./revision1.sh $ORG $PROXY_NAME $APIGEE_ENVIRONMENT'
+          sh 'sudo ./revision1.sh $ORG $PROXY_NAME $APIGEE_ENVIRONMENT'
 
           // Access service account credentials securely using Jenkins credentials
           withCredentials([file(credentialsId: 'service_file', variable: 'SERVICE_ACCOUNT_FILE_CONTENT')]) {
             sh '''
               # Decode the base64 encoded service account JSON content
               echo $SERVICE_ACCOUNT_FILE_CONTENT > service_account.json
-  
             '''
           }
 
@@ -52,7 +52,7 @@ pipeline {
           archiveArtifacts artifacts: 'build.env', allowEmptyArchive: false
         }
       }
-    }s
+    }
 
     stage('Deploy') {
       steps {
