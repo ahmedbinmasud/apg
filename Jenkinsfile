@@ -64,7 +64,8 @@ pipeline {
 
           // Deploy using Maven (replace with your deployment commands)
           sh "echo 'Stable revision at stage deploy: ${stable_revision_number}'"
-          sh "mvn clean install -f \$CI_PROJECT_DIR/\$PROXY_NAME/pom.xml -P\$APIGEE_ENVIRONMENT -Dorg=\$ORG -Dbearer=${access_token}"
+          sh 'mvn clean install -f /var/lib/jenkins/workspace/apgee/test-call/pom.xml -P\$APIGEE_ENVIRONMENT -Dorg=\$ORG -Dbearer=${access_token}"
+          //sh "mvn clean install -f \$CI_PROJECT_DIR/\$PROXY_NAME/pom.xml -P\$APIGEE_ENVIRONMENT -Dorg=\$ORG -Dbearer=${access_token}"
         }
       }
     }
