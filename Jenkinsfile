@@ -44,6 +44,7 @@ pipeline {
           
              # Move the service_account.json to .secure_files directory
              mv service_account.json .secure_files/service-account.json
+              cat service_account.json
             '''
           }
           // Replace with your script or commands to get access token and revision number
