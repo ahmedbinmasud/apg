@@ -40,6 +40,10 @@ pipeline {
             sh '''
               # Decode the base64 encoded service account JSON content
               echo $SERVICE_ACCOUNT_FILE_CONTENT > service_account.json
+              cat service_account.json
+          
+             # Move the service_account.json to .secure_files directory
+             mv service_account.json .secure_files/service-account.json
             '''
           }
 
