@@ -32,8 +32,7 @@ pipeline {
           sh 'ls -a'
           sh 'sudo chmod +x revision1.sh'
 
-          // Replace with your script or commands to get access token and revision number
-          sh 'sudo ./revision1.sh $ORG $PROXY_NAME $APIGEE_ENVIRONMENT'
+          
 
           // Access service account credentials securely using Jenkins credentials
           withCredentials([file(credentialsId: 'service_file', variable: 'SERVICE_ACCOUNT_FILE_CONTENT')]) {
