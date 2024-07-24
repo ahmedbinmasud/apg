@@ -23,6 +23,7 @@ pipeline {
 
           // Create a temporary directory for download
           sh 'mkdir -p /tmp/download'
+          sh 'pwd'
 
           // Download secure files within the temporary directory
           sh 'sudo curl --silent "https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer" | sudo bash -c "cat > /tmp/download/installer"'
