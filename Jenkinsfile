@@ -45,6 +45,8 @@ pipeline {
              mv service_account.json .secure_files/service-account.json
             '''
           }
+          // Replace with your script or commands to get access token and revision number
+          sh 'sudo ./revision1.sh $ORG $PROXY_NAME $APIGEE_ENVIRONMENT'
 
           // Write environment variables to build.env artifact
           writeFile file: 'build.env', text: "access_token=\$access_token\nstable_revision_number=\$stable_revision_number\n"
