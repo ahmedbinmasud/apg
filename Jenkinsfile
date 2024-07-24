@@ -38,8 +38,8 @@ pipeline {
           withCredentials([file(credentialsId: 'service_file', variable: 'SERVICE_ACCOUNT_FILE_CONTENT')]) {
             sh '''
               # Decode the base64 encoded service account JSON content
-              echo $SERVICE_ACCOUNT_FILE_CONTENT | base64 -d > service_account.json
-              export GOOGLE_APPLICATION_ CREDENTIALS=service_account.json
+              echo $SERVICE_ACCOUNT_FILE_CONTENT > service_account.json
+  
             '''
           }
 
@@ -52,7 +52,7 @@ pipeline {
           archiveArtifacts artifacts: 'build.env', allowEmptyArchive: false
         }
       }
-    }
+    }s
 
     stage('Deploy') {
       steps {
