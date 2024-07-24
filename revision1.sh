@@ -33,7 +33,7 @@ fi
 echo "Access Token: $access_token"
 
 # Save the access token in the environment file
-echo "access_token=$access_token" >> $GITHUB_ENV
+echo "access_token=$access_token" >>build.env
 
 # Set output for GitHub Actions
 echo "::set-output name=access_token::$access_token"
@@ -47,7 +47,7 @@ if [ $? -eq 0 ]; then
     stable_revision_number=$(echo "$revision_info" | jq -r ".deployments[0]?.revision // null")
     echo "Stable Revision: $stable_revision_number"
     # Save the stable revision number in the environment file
-    echo "stable_revision_number=$stable_revision_number" >> .secure_files/build.env
+    echo "stable_revision_number=$stable_revision_number" >> build.env
 else
     # Handle the case where the curl command failed
     echo "Error: Failed to retrieve API deployments."
