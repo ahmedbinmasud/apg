@@ -36,16 +36,8 @@ pipeline {
           
 
           // Access service account credentials securely using Jenkins credentials
-          withCredentials([file(credentialsId: 'service_file', variable: 'SERVICE_ACCOUNT_FILE_CONTENT')]) {
-            sh '''
-              # Decode the base64 encoded service account JSON content
-              echo $SERVICE_ACCOUNT_FILE_CONTENT > service_account.json
-              cat service_account.json
-          
-             # Move the service_account.json to .secure_files directory
-             mv service_account.json .secure_files/service-account.json
-              cat .secure_files/service-account.json
-            '''
+          withCredentials([file(credentialsId: "service_file", variable: "SECRET_FILE")]) {
+                        sh 'cp "$SECRET_FILE" .secure_files/service-account.json'
           }
           // Replace with your script or commands to get access token and revision number
           sh 'sudo ./revision1.sh $ORG $PROXY_NAME $APIGEE_ENVIRONMENT'
